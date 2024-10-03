@@ -10,3 +10,4 @@ Route::get("/product/show/{product}", [ProductController::class, "show"])->name(
 Route::delete("/product/destroy/{product}", [ProductController::class, "destroy"])->name("Product.delete");
 Route::get("/product/edit/{product}", [ProductController::class, "edit"])->name("Product.edit");
 Route::put("/product/update/{product}", [ProductController::class, "update"])->name("Product.update");
+Route::post("/product/filter", [ProductController::class, "filter"])->name("Product.filter");

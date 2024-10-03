@@ -109,6 +109,24 @@ class ProductController extends Controller
         return back();
     }
 
+    public function filter(Request $request)
+    {
+
+        $filtredPrice = $request->price;
+
+        $query = Product::query();
+
+
+        if ($filtredPrice != "all") {
+            $query->where("price", "<", $filtredPrice);
+        }
+
+        $products = $query->get();
+
+
+        return view("products.partials.showFiltredProducts", compact("products"));
+    }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -122,6 +140,6 @@ class ProductController extends Controller
         }
 
         $product->delete();
-        return back();
+        return redirect()->route("showProduct") ;
     }
 }
