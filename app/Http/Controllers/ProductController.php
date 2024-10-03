@@ -113,12 +113,19 @@ class ProductController extends Controller
     {
 
         $filtredPrice = $request->price;
+        $sortedDate = $request->dateSort;
 
         $query = Product::query();
 
 
         if ($filtredPrice != "all") {
             $query->where("price", "<", $filtredPrice);
+        }
+
+        if ($sortedDate == "latestFirst") {
+            $query->orderBy("created_at", "desc");
+        } else {
+            $query->orderBy("created_at", "asc");
         }
 
         $products = $query->get();

@@ -1,7 +1,7 @@
 @extends('layouts.index')
 
 @section('section')
-<form action="/product/update/{{ $product->id }}" method="post" class="mt-10 w-3/5 mx-auto flex flex-col space-y-4" enctype="multipart/form-data">
+<form action="/product/update/{{ $product->id }}" method="post" class="my-10 w-3/5 mx-auto flex flex-col space-y-4" enctype="multipart/form-data">
     @csrf
     @method("PUT")
     <h1 class="text-3xl font-bold text-center mb-8 font-mono">Editing {{ $product->name }}</h1>

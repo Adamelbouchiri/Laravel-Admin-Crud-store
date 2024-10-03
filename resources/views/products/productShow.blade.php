@@ -6,14 +6,20 @@
     
     <form action="/product/filter" method="post" class="flex">
         @csrf
-        <select name="price" class="cursor-pointer appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 focus:outline-none focus:border-blue-500">
+        <select name="price" class="w-52 cursor-pointer appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 focus:outline-none focus:border-blue-500">
             <option selected disabled value="">Select price under</option>
-            <option value="all">All</option>
+            <option selected value="all">All</option>
             <option value="10">10</option>
             <option value="15">15</option>
             <option value="20">20</option>
         </select>
-        <button type="submit" class="ms-5 font-mono duration-200 block bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Filter</button>
+
+        <select name="dateSort" class="ms-5 w-52 cursor-pointer appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 focus:outline-none focus:border-blue-500">
+            <option disabled value="">Select date</option>
+            <option value="latestFirst">Latest First</option>
+            <option selected value="oldestFirst">Oldest First</option>
+        </select>
+        <button type="submit" class="ms-2 font-mono duration-200 block bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Filter</button>
     </form>
         
         <h1 class="text-3xl font-bold text-center mb-8 font-mono">Available Products</h1>
