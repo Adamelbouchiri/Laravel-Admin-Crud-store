@@ -25,7 +25,7 @@
         <h1 class="text-3xl font-bold text-center mb-8 font-mono">Available Products</h1>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             @foreach ($products as $product)
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="relative bg-white rounded-lg shadow-md overflow-hidden">
                 <img src="{{ asset('images/' . $product->image) }}" alt="Product 1" class="w-full h-48 object-cover">
                 <div class="p-4">
                     <h2 class="text-lg font-semibold font-mono">{{ $product->name }}</h2>
@@ -41,6 +41,11 @@
                         <a href="/product/show/{{ $product->id }}" class="font-mono duration-200 block bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Show</a>
                     </div>
                 </div>
+                <form action="/cart/store" method="post" class="absolute top-2 right-2 cursor-pointer ms-10 font-mono duration-200 block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                    @csrf
+                    <input type="text" class="hidden" value="{{ $product->id }}" name="product">
+                    <button type="submit">Add To Cart</button>
+                </form>
             </div>
             @endforeach
         </div>

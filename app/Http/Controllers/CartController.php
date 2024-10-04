@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\cart;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class CartController extends Controller
 {
@@ -12,7 +14,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $carts = cart::all();
+        return view("cart.cart", compact("carts"));
     }
 
     /**
@@ -28,7 +31,30 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd();
+        $productId = $request->product;
+        $product=Product::find($productId);
+
+        $cartItem = cart::where("product_id", $productId)->first();
+        if ($cartItem) {
+
+            $cartItem->quantity++;
+            $cartItem->save();
+        } else {
+
+            cart::create([
+                'product_id' => $productId, 
+                'name' => $product->name,
+                'price' => $product->price,
+                'quantity' => 1,
+                'image' => $product->image,
+            ]);
+        }
+
+        $product->stock -= 1;
+        $product->save();
+        
+        return redirect()->route("showProduct");
     }
 
     /**
@@ -60,6 +86,7 @@ class CartController extends Controller
      */
     public function destroy(cart $cart)
     {
-        //
+        $cart->delete();
+        return back();
     }
 }
